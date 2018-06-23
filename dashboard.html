@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ItiLite Dashboard</title>
+    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+
+    <link rel="stylesheet" type="text/css" href="assets/css/main.min.css">
+
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/chart.js"></script>
+	<script src="assets/js/utils.js"></script>
+    <script src="assets/js/angular.js"></script>
+    <script src="assets/js/main.js"></script>
+</head>
+<body>
+<!-- Header -->
+<nav class="navbar navbar-default" role="navigation"></nav>
+
+<div class="container-fluid header">
+		<div class="row row-header">
+
+			<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 vads text-left" style="padding-left: 6rem;">
+				<a href="dashboard" style="cursor:pointer;">
+					<!-- Brand -->
+                    <img src="assets/images/itilite-logo-1.png" alt="">
+				</a>
+
+			</div>
+
+            <div class="col-xs-6 col-sm-7 col-md-7 col-lg-7 text-center vendorlogo">
+			<div class="pull-right profilepopup">
+				<ul class="navbar-nav" style="position:relative">
+						 <li class="dropdown">
+							 <!-- <img width="24%" src="../../assets/admin.png"> -->
+							<a href="#" class="dropdown-toggle dropdown-toggle-text dark-theme" data-toggle="dropdown" aria-expanded="false">
+							<img style="vertical-align: baseline;" src="assets/images/vendor-admin.svg" alt="">
+
+							<span class="vendorheader-name">Admin</span>
+							<span class="vendorheader-name">
+								<!-- dropdown arrow -->
+							<img src="assets/images/vendor-drop.svg" alt="">
+							</span>
+							</a>
+							<ul class="dropdown-menu  profilecontainer" style="padding: 0;right:0;left:auto;">
+								<li><a id="header_v_profile" href="#" style="padding: 6px 20px;">Profile</a></li>
+								<li>	<a class="logout_click"  style="padding: 6px 20px;" id="sidebar_logout" data-adminid="<?php echo $adminid?>" href="#">Logout</a></li>
+							</ul>
+						 </li>
+					 </ul>
+			</div>
+		      </div>
+
+			<div class="col-xs-2 col-sm-1 col-md-1 col-lg-1">
+					<button class="head-right-icon" id="sidebar-toggle-button"  data-toggle="collapse" data-target="#demo">
+						<label class="head-right-icon-svg">
+                            <img src="assets/images/asset-right-icon.svg" alt="">
+						</label>
+						<!-- <span>toggle menu</span> -->
+					</button>
+			</div>
+		</div>
+</div>
+
+</body>
+<div  class="body-wrapper">
+    <div class="container-fluid content-wrapper">
+        <div class="compressing mar-top-30">
+
+            <!-- Plan Usage data -->
+            <div class="parent_parameter">
+                <div class="row mar-top-30">
+                    <div class="col-md-6 col-lg-6 col-xl-6 parameter">
+                        <div class="col-xs-12 child_parameter no-paddding">
+
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 inner_parameter no-padding">
+                                <p class="text-center center_text box-title"><span class="text1">Where You Are Spending</span>
+                                    <br>
+                                    <span class="text2"></span>
+                                </p>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 inner_parameter no-padding">
+                                <div style="width:90%;">
+                            		<canvas id="canvas_line"></canvas>
+                            	</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-6 col-xl-6 parameter">
+                        <div class="col-xs-12 child_parameter no-paddding">
+
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 inner_parameter no-padding">
+                                <p class="text-center center_text box-title"><span class="text1 ">Which Department Is Savings</span>
+                                    <br>
+                                    <span class="text2"></span>
+                                </p>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 inner_parameter no-padding">
+                                <div style="width:90%;">
+                            		<canvas id="canvas_bar"></canvas>
+                            	</div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <div class="parent_parameter" ng-app="app">
+                <div class="row mar-top-30">
+                    <div class="col-md-6 col-lg-6 col-xl-6 parameter">
+                        <div class="col-xs-12 child_parameter no-paddding" ng-controller="keymembers">
+
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 inner_parameter no-padding">
+                                <p class="text-center center_text box-title"><span class="text1 ">Key Members</span>
+                                    <br>
+                                    <span class="text2"></span>
+                                </p>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 inner_parameter no-padding inner_table">
+                                <table class="table table-striped">
+                                    <thead align="center">
+                                        <tr>
+                                            <th scope="col">Avarage</th>
+                                            <th scope="col">Travel/Cost</th>
+                                            <th scope="col">Amount</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="values in keymem">
+                                            <td>{{values.avarage}}</td>
+                                            <td>{{values.travelpercost}}</td>
+                                            <td>{{values.amount}}</td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-6 col-xl-6 parameter">
+                        <div class="col-xs-12 child_parameter no-paddding" ng-controller="savings">
+
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 inner_parameter no-padding">
+                                <p class="text-center center_text box-title"><span class="text1 ">How You are Saving</span>
+                                    <br>
+                                    <span class="text2"></span>
+                                </p>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 inner_parameter no-padding inner_table">
+                                <table class="table table-striped">
+                                    <thead align="center">
+                                        <tr>
+                                            <th scope="col">Buget</th>
+                                            <th scope="col">Actual</th>
+                                            <th scope="col">Savings</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="values in save">
+                                            <td>{{values.buget}}</td>
+                                            <td>{{values.actual}}</td>
+                                            <td>{{values.savings}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="head1 mar-top-30"> </div>
+            <!-- Sidebar -->
+            <div class="menu">
+            	<div class="menu1"><a tabindex="-1"  href="#">Dashboard</a></div>
+
+            	<div class="menu1"><a tabindex="-1"  class="sidebar_handle" href="#">About Us</a></div>
+
+            	<div class="menu1"><a tabindex="-1"  class="sidebar_handle" href="#">
+            			Contact Us
+            		</a></div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Footer -->
+<div class="container-fluid footer1">
+    <div class="fleft">
+        <ul class="margin0">
+            <li class="footer-ul-li"><a href="http://itlite.com/" class="copyright" target="_blank">© <span id="copyrightyear">2014</span> ItLite</a></li>
+        </ul>
+    </div>
+    <div class="fright">
+        <ul class="margin0">
+            <li class="footer-ul-li"><a href="#" class="copyright" target="_blank">Qureies : support@itlite.com</a></li>
+        </ul>
+    </div>
+
+    <div class="fmiddle">
+        <ul class="margin0">
+            <li class="footer-ul-li"><a href="http://itlite.com/" class="copyright" target="_blank"><img src="assets/images/fb.png" alt="" width="25px"></a></li>
+            <li class="footer-ul-li"><a href="http://itlite.com/" class="copyright" target="_blank"><img src="assets/images/gp.png" alt="" width="25px"></a></li>
+            <li class="footer-ul-li"><a href="http://itlite.com/" class="copyright" target="_blank"><img src="assets/images/tw.png" alt="" width="25px"></a></li>
+        </ul>
+    </div>
+
+
+
+
+    <script>
+      var thisYear  = new Date().getFullYear();
+      $('#copyrightyear').text(thisYear);
+    </script>
+<script>$(document).ready(function(){$(".content-wrapper").css("min-height",($(window).height()-$(".header").height()-$(".footer1").height())+"px");});</script>
+
+<script>
+
+window.onload = function() {
+    var myBarChart,myLinechart;
+    var barctx = document.getElementById("canvas_bar").getContext("2d");
+
+    //Bar chart
+    $.getJSON("data/barchart.json", function(dataset) {
+        console.log(dataset);
+        var bardata = {
+            labels: dataset[0],
+            datasets: [{
+                label: "Buget",
+                backgroundColor: "blue",
+                data: dataset[1]
+            }, {
+                label: "Actual",
+                backgroundColor: "red",
+                data: dataset[2]
+            }]
+        };
+        myBarChart = new Chart(barctx, {
+            type: 'horizontalBar',
+            data: bardata,
+            options: {
+                scales: {
+                    xAxes: [{
+                        ticks: {
+                            suggestedMin: 00,
+                            suggestedMax: 15
+                        }
+                    }]
+                },
+                elements: {
+                    rectangle: {
+                        borderWidth: 1,
+                    }
+                },
+                responsive: true,
+                legend: {
+                    position: 'right',
+                },
+                title: {
+                    display: true,
+                    text: 'Department Chart'
+                }
+            }
+        });
+		// render chart and update chart
+        updateBarChart();
+	});
+
+    //Line chart
+    $.getJSON("data/linechart.json", function(dataset) {
+
+        // var randomScalingFactor = function() {
+        //     return Math.round(Math.random() * 100);
+        // };
+        var config = {
+            type: 'line',
+            data: {
+                labels: dataset[0],
+                datasets: [{
+                    label: 'Actual Spend',
+                    fill: false,
+                    backgroundColor: window.chartColors.red,
+                    borderColor: window.chartColors.red,
+                    data: dataset[1]
+                }, {
+                    label: 'Buget',
+                    fill: false,
+                    backgroundColor: window.chartColors.blue,
+                    borderColor: window.chartColors.blue,
+                    data: dataset[2],
+                }]
+            },
+            options: {
+                bezierCurve: false,
+                responsive: true,
+                elements: {
+        line: {
+            tension: 0
+        }
+    },
+                title: {
+                    display: true,
+                    text: 'Spend Chart'
+                },
+            }
+        };
+
+        myLinechart = new Chart(linectx, config);
+        updateLineChart();
+    });
+
+
+            //update line chart
+            function updateLineChart() {
+                $.getJSON("data/linechart.json", function(dataset) {
+                    console.log(dataset);
+                    var newdata = {
+                        labels: dataset[0],
+                        datasets: [{
+                            label: 'Actual Spend',
+                            fill: false,
+                            backgroundColor: window.chartColors.red,
+                            borderColor: window.chartColors.red,
+                            data: dataset[1]
+                        }, {
+                            label: 'Buget',
+                            fill: false,
+                            backgroundColor: window.chartColors.blue,
+                            borderColor: window.chartColors.blue,
+                            data: dataset[2],
+                        }]
+                    }
+                    myLinechart.config.data = newdata;
+                    myLinechart.update();
+                    setTimeout(function(){updateLineChart()}, 5000);
+                });
+        	}
+
+            //update bar chart
+            function updateBarChart() {
+                $.getJSON("data/barchart.json", function(dataset) {
+                    console.log(dataset);
+                    var bardata = {
+                        labels: dataset[0],
+                        datasets: [{
+                            label: "Buget",
+                            backgroundColor: "blue",
+                            data: dataset[1]
+                        }, {
+                            label: "Actual",
+                            backgroundColor: "red",
+                            data: dataset[2]
+                        }]
+                    };
+                    myBarChart.config.data = bardata;
+                    myBarChart.update();
+                    setTimeout(function(){updateBarChart()}, 5000);
+                });
+        	}
+
+
+
+    //line chart
+    var linectx = document.getElementById('canvas_line').getContext('2d');
+
+}
+
+
+
+
+$('.submenu_collapse').click(function()
+{
+    $(this).find(".fa-chevron-right").toggleClass("rotate-chevron");
+});
+
+$(".c-hamburger").click(function()
+{
+    if($(".menu").hasClass("close"))
+    {
+         $(".c-hamburger").removeClass("is-active");
+         $(".c-hamburger").addClass("rotate");
+         $(".head-right-icon").addClass("rotate rotate-chevron");
+         $(".menu").removeClass("close");
+         $(".menu").addClass("open");
+         $(".content-wrapper").removeClass("close2");
+         $(".content-wrapper").addClass("close1");
+    }
+    else
+    {
+        $(".c-hamburger").toggleClass("rotate");
+        $(".head-right-icon").toggleClass("rotate rotate-chevron");
+        $(".menu").toggleClass("open");
+        $(".content-wrapper").toggleClass("close1");
+     }
+});
+
+$(".head-right-icon").click(function()
+{
+    if($(".menu").hasClass("close"))
+    {
+         $(".head-right-icon").removeClass("is-active");
+         $(".head-right-icon").addClass("rotate-chevron");
+         $(".menu").removeClass("close");
+         $(".menu").addClass("open");
+         $(".content-wrapper").removeClass("close2");
+         $(".content-wrapper").addClass("close1");
+         $("#header-right-icon").attr("fill", "#d4d4e4");
+    }
+    else
+    {
+        $(".head-right-icon").toggleClass("rotate-chevron");
+        $(".menu").toggleClass("open");
+        $(".content-wrapper").toggleClass("close1");
+        if($(".head-right-icon").hasClass("rotate-chevron")){
+            $("#header-right-icon").attr("fill", "#d4d4e4");
+        }else{
+            $("#header-right-icon").attr("fill", "#9BA0AD");
+        }
+     }
+});
+
+</script>
+
+  </body>
+  </html>
